@@ -10,7 +10,7 @@ import HootList from "./pages/HootList"
 import * as hootService from './services/hoots'
 import HootDetails from "./pages/HootDetails"
 import HootForm from "./pages/HootForm"
-import CommentForm from "./components/CommentForm"
+
 
 const getUserFromToken = () => {
   const token = localStorage.getItem('token')
@@ -37,21 +37,6 @@ const App = () => {
     setHoots([newHoot, ...hoots])
     navigate('/hoots')
   }
-
-  const handleDeleteHoot = async (hootId) => {
-    const deletedHoot = await hootService.deleteHoot(hootId)
-    setHoots(hoots.filter((hoot) => hoot._id !== hootId))
-    navigate('/hoots')
-  }
-
-  const handleUpdateHoot = async (hootId, formData) => {
-    const updatedHoot = await hootService.update(hootId, formData)
-    const updatedHootsList = hoots.map((hoot) => {
-      return hootId === hoot._id ? updatedHoot : hoot
-    })
-    setHoots(updatedHootsList)
-    navigate(`/hoots/${hootId}`)
-  }
   
   return (
     <div>
@@ -62,11 +47,8 @@ const App = () => {
         {user ? (
           <>
             <Route path='/hoots' element={<HootList hoots={hoots} />} />
-            <Route path='/hoots/:hootId' element={<HootDetails user={user} handleDeleteHoot={handleDeleteHoot} />} />
+            <Route path='/hoots/:hootId' element={<HootDetails user={user} />} />
             <Route path='/hoots/new' element={<HootForm handleAddHoot={handleAddHoot} />} />
-            <Route path='/hoots/:hootId/edit' element={<HootForm handleUpdateHoot={handleUpdateHoot} />} />
-            <Route path='/hoots/:hootId/comments/:commentId/edit' element={<CommentForm />} />
-
           </>
         ) : (
           <>

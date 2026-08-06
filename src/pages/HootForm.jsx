@@ -1,11 +1,6 @@
-import { useState, useEffect } from 'react'
-import { useParams } from 'react-router'
-
-import * as hootService from '../services/hoots'
+import { useState } from 'react'
 
 const HootForm = (props) => {
-    const { hootId } = useParams()
-    console.log(hootId)
 
     const initialState = {
         title: '',
@@ -19,27 +14,12 @@ const HootForm = (props) => {
   }
 
   const handleSubmit = (evt) => {
-    evt.preventDefault()
-    if (hootId) {
-        props.handleUpdateHoot(hootId, formData)
-    } else {
         props.handleAddHoot(formData)
-    }
   }
 
-  useEffect(() => {
-    const fetchHoot = async () => {
-        const hootData = await hootService.show(hootId)
-        setFormData(hootData)
-    }
-    if (hootId) fetchHoot()
-    
-    return () => setFormData(initialState)
-  }, [hootId])
 
   return (
     <main className='card'>
-    <h1>{hootId ? 'Edit Hoot' : 'New Hoot'}</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor='title-input'>Title</label>
         <input

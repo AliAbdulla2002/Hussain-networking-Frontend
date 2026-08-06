@@ -1,5 +1,4 @@
 import { Link } from "react-router"
-import Icon from "../components/Icon"
 
 const HootList = (props) => {
   return (
@@ -12,7 +11,6 @@ const HootList = (props) => {
                     <h2 key={hoot._id}>{hoot.title}</h2> 
                     <p className="hoot-author">Posted by {hoot.author?.username || 'Unknown user'}</p>
                 </header>
-                <Icon category={hoot.category} />
                 <p className="hoot-text">{hoot.text}</p>
                 <footer className="hoot-footer">
                 <span>
