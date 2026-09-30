@@ -8,10 +8,8 @@ const signUp = async (formData) => {
             body: JSON.stringify(formData)
         })
         const data = await res.json()
-        console.log(data)
-
+        
         if (data.err) {
-            console.log(data.err)
             throw new Error(data.err)
         }
 
@@ -19,11 +17,9 @@ const signUp = async (formData) => {
             localStorage.setItem('token', data.token)
             return JSON.parse(atob(data.token.split('.')[1])).payload
         }
-
     } catch (err) {
         throw new Error(err)
     }
-
 }
 
 const signIn = async (formData) => {
@@ -36,20 +32,16 @@ const signIn = async (formData) => {
         const data = await res.json()
 
         if (data.err) {
-            console.log(data.err)
             throw new Error(data.err)
         }
 
         if (data.token) {
             localStorage.setItem('token', data.token)
-            // returning the user object
             return JSON.parse(atob(data.token.split('.')[1])).payload
         }
-
     } catch (err) {
         throw new Error(err)
     }
-
 }
 
 export {
