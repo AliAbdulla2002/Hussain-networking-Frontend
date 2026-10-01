@@ -90,13 +90,13 @@ const Nav = (props) => {
     const isNewCourseActive = location.pathname === '/courses/new';
 
     return (
-        <nav className="bg-gray-900 px-4 md:px-8 py-2 flex justify-between items-center relative z-50 border-b border-gray-800 shadow-lg h-[85px] overflow-visible">
-            <div className="flex items-center gap-10">
-                <Link className="flex items-center" to="/" onClick={() => setIsMobileMenuOpen(false)}>
+        <nav className="bg-gray-900 px-4 md:px-8 flex justify-between items-center relative z-50 border-b border-gray-800 shadow-lg h-[85px]">
+            <div className="flex items-center h-full gap-10">
+                <Link className="flex items-center h-full" to="/" onClick={() => setIsMobileMenuOpen(false)}>
                     <img 
                         src="/Dark_logo.png" 
                         alt="Logo" 
-                        className="h-[80px] w-auto object-contain mix-blend-lighten hover:opacity-90 transition-opacity transform scale-125 md:scale-100 origin-left ml-4 md:ml-0" 
+                        className="h-[60px] md:h-[70px] w-auto object-contain mix-blend-lighten hover:opacity-90 transition-opacity transform scale-[1.4] origin-left translate-x-3 md:translate-x-0 md:scale-[1.2]" 
                     />
                 </Link>
 
@@ -128,7 +128,7 @@ const Nav = (props) => {
                 )}
             </div>
 
-            <div className="flex items-center gap-4 md:gap-6">
+            <div className="flex items-center h-full gap-5 md:gap-6">
                 {props.user ? (
                     <>
                         {canToggleView && (
@@ -136,11 +136,11 @@ const Nav = (props) => {
                                 onClick={toggleViewMode}
                                 className={`hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg border text-xs font-bold transition-all shadow-md ${isStaff ? 'bg-blue-500/10 border-blue-500/50 text-blue-400 hover:bg-blue-600 hover:text-white' : 'bg-green-500/10 border-green-500/50 text-green-400 hover:bg-green-600 hover:text-white'}`}
                             >
-                                {isStaff ? '👀 Student View' : '⚙️️ Admin View'}
+                                {isStaff ? '👀 Student View' : '⚙️ Admin View'}
                             </button>
                         )}
 
-                        <div className="relative flex items-center" ref={dropdownRef}>
+                        <div className="relative flex items-center h-full" ref={dropdownRef}>
                             <button 
                                 onClick={toggleNotifications} 
                                 className={`relative text-2xl flex items-center justify-center transition-all duration-300 transform hover:scale-110 ${showDropdown ? 'text-red-500 drop-shadow-[0_0_8px_rgba(220,38,38,0.5)]' : 'text-gray-400 hover:text-red-400'}`}
@@ -154,7 +154,7 @@ const Nav = (props) => {
                             </button>
 
                             {showDropdown && (
-                                <div className="absolute right-[-60px] sm:right-0 top-12 mt-2 w-[300px] sm:w-80 bg-gray-800 border border-gray-700 rounded-xl shadow-2xl overflow-hidden z-50 animate-fade-in-down">
+                                <div className="absolute right-[-60px] sm:right-0 top-[70px] mt-2 w-[300px] sm:w-80 bg-gray-800 border border-gray-700 rounded-xl shadow-2xl overflow-hidden z-50 animate-fade-in-down">
                                     <div className="p-3 bg-gray-900 border-b border-gray-700 flex justify-between items-center">
                                         <h3 className="text-white font-bold text-sm">Notifications</h3>
                                         {notifications.length > 0 && (
@@ -195,15 +195,15 @@ const Nav = (props) => {
 
                         <div className="hidden lg:block w-px h-8 bg-gray-700"></div>
 
-                        <Link to="/profile" className="hidden lg:flex items-center gap-3 text-gray-400 hover:text-white transition-all cursor-pointer group">
+                        <Link to="/profile" className="hidden lg:flex items-center h-full gap-3 text-gray-400 hover:text-white transition-all cursor-pointer group">
                             {props.user.avatar ? (
                                 <img src={props.user.avatar} alt="Avatar" className="w-10 h-10 rounded-full object-cover border border-gray-600 group-hover:border-red-500 transition-colors" />
                             ) : (
                                 <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-lg border border-gray-600 group-hover:border-red-500 transition-colors">👤</div>
                             )}
-                            <div className="flex flex-col">
-                                <span className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors">Welcome,</span>
-                                <span className={`font-bold tracking-wide transition-colors ${location.pathname === '/profile' ? 'text-red-500' : 'text-white'}`}>
+                            <div className="flex flex-col justify-center">
+                                <span className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors leading-none mb-1">Welcome,</span>
+                                <span className={`font-bold tracking-wide transition-colors leading-none ${location.pathname === '/profile' ? 'text-red-500' : 'text-white'}`}>
                                     {props.user.username || props.user.email?.split('@')[0]}
                                 </span>
                             </div>
@@ -214,18 +214,18 @@ const Nav = (props) => {
                         </button>
 
                         <button 
-                            className="lg:hidden text-white text-2xl focus:outline-none ml-2"
+                            className="lg:hidden flex items-center justify-center text-white text-2xl focus:outline-none w-8 h-full"
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         >
                             {isMobileMenuOpen ? '✖' : '☰'}
                         </button>
                     </>
                 ) : (
-                    <ul className="flex items-center gap-4 md:gap-8 m-0 p-0 list-none">
-                        <li className="hidden sm:block"><Link to='/' className="text-slate-200 font-bold text-base hover:text-red-400 transition-colors">Home</Link></li>
-                        <li className="hidden sm:block"><Link to='/sign-up' className="text-slate-200 font-bold text-base hover:text-red-400 transition-colors">Sign Up</Link></li>
-                        <li>
-                            <Link to='/sign-in' className="bg-red-600 text-white px-5 py-2.5 md:px-6 rounded-md font-bold text-sm md:text-lg shadow-md shadow-red-600/30 hover:bg-red-700 transition-all transform hover:scale-105 inline-block">
+                    <ul className="flex items-center h-full gap-4 md:gap-8 m-0 p-0 list-none">
+                        <li className="hidden sm:flex items-center h-full"><Link to='/' className="text-slate-200 font-bold text-base hover:text-red-400 transition-colors">Home</Link></li>
+                        <li className="hidden sm:flex items-center h-full"><Link to='/sign-up' className="text-slate-200 font-bold text-base hover:text-red-400 transition-colors">Sign Up</Link></li>
+                        <li className="flex items-center h-full">
+                            <Link to='/sign-in' className="bg-red-600 text-white px-5 py-2 md:px-6 rounded-md font-bold text-sm md:text-lg shadow-md shadow-red-600/30 hover:bg-red-700 transition-all transform hover:scale-105 inline-block">
                                 Sign In
                             </Link>
                         </li>
