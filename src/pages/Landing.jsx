@@ -19,12 +19,16 @@ const Landing = () => {
     }, []);
 
     return (
-        <main className="min-h-[calc(100vh-85px)] bg-gray-900 text-white font-sans flex flex-col items-center pt-16 px-4 relative overflow-hidden">
+        <main className="min-h-[calc(100vh-85px)] bg-gray-900 text-white font-sans flex flex-col items-center pt-16 relative overflow-hidden">
+            <style>{`
+                .hide-scrollbar::-webkit-scrollbar { display: none; }
+                .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+            `}</style>
             
             <div className="absolute top-0 right-0 w-96 h-96 bg-red-600/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-red-600/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3 pointer-events-none"></div>
 
-            <div className="max-w-5xl w-full text-center flex flex-col items-center relative z-10">
+            <div className="max-w-5xl w-full text-center flex flex-col items-center relative z-10 px-4">
                 <img 
                     src="/Landing.png" 
                     alt="Hussain Ali Networking" 
@@ -56,13 +60,13 @@ const Landing = () => {
                         <span className="text-orange-500 text-3xl">🎁</span>
                         <h2 className="text-3xl font-extrabold text-white">Try for Free</h2>
                     </div>
-                    <p className="text-gray-400 text-sm mb-12 text-center max-w-lg">
+                    <p className="text-gray-400 text-sm mb-12 text-center max-w-lg px-4">
                         Preview our premium content. Create a free account to watch these lessons and decide if this learning path is right for you.
                     </p>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+                    <div className="flex overflow-x-auto pb-8 gap-6 px-6 md:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 snap-x snap-mandatory hide-scrollbar w-full">
                         {trialLessons.map((lesson, idx) => (
-                            <div key={idx} className="bg-gray-800 border border-gray-700 rounded-2xl overflow-hidden shadow-xl hover:border-red-500 transition-all duration-300 flex flex-col group hover:-translate-y-1">
+                            <div key={idx} className="min-w-[85vw] sm:min-w-[60vw] md:min-w-0 snap-center bg-gray-800 border border-gray-700 rounded-2xl overflow-hidden shadow-xl hover:border-red-500 transition-all duration-300 flex flex-col group hover:-translate-y-1">
                                 <div className="h-48 bg-gray-900 relative overflow-hidden flex items-center justify-center">
                                     {lesson.coverImage ? (
                                         <img src={lesson.coverImage} alt={lesson.courseTitle} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60" />
@@ -90,7 +94,7 @@ const Landing = () => {
                                         <h3 className="text-lg font-bold text-white line-clamp-1 mb-1 group-hover:text-red-400 transition-colors">
                                             {lesson.lessonTitle}
                                         </h3>
-                                        <p className="text-gray-400 text-xs">
+                                        <p className="text-gray-400 text-xs truncate">
                                             Course: <span className="text-gray-300 font-semibold">{lesson.courseTitle}</span>
                                         </p>
                                     </div>

@@ -414,7 +414,7 @@ const Dashboard = ({ user, socket }) => {
                                             onClick={() => setSelectedRoleForPerms('Instructor')}
                                             className={`px-8 py-2.5 rounded-lg text-sm font-bold transition-all ${selectedRoleForPerms === 'Instructor' ? 'bg-indigo-600 text-white shadow-md' : 'text-gray-400 hover:text-white hover:bg-gray-700'}`}
                                         >
-                                            👨‍🏫 Instructor
+                                            👨‍‍🏫 Instructor
                                         </button>
                                     </div>
                                 </div>
@@ -491,8 +491,8 @@ const Dashboard = ({ user, socket }) => {
                                     <div className="space-y-4">
                                         {studentsList.filter(s => s._id !== user._id).map(student => (
                                             <div key={student._id} className={`flex items-center justify-between p-4 rounded-xl border transition-colors ${student.isBanned ? 'bg-red-900/10 border-red-900/50' : 'bg-gray-800 border-gray-700 hover:border-gray-500'}`}>
-                                                <div className="flex items-center gap-4">
-                                                    <div className="relative">
+                                                <div className="flex items-center gap-4 flex-1 min-w-0">
+                                                    <div className="relative flex-shrink-0">
                                                         {student.avatar ? (
                                                             <img src={student.avatar} alt="avatar" className={`w-12 h-12 rounded-full object-cover border-2 ${student.isOnline ? 'border-green-500' : 'border-gray-600'}`} />
                                                         ) : (
@@ -502,20 +502,20 @@ const Dashboard = ({ user, socket }) => {
                                                             <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-gray-800 rounded-full"></span>
                                                         )}
                                                     </div>
-                                                    <div>
-                                                        <h3 className={`font-bold ${student.isBanned ? 'text-gray-500 line-through' : 'text-white'} flex items-center gap-2`}>
-                                                            {student.username || 'No Name'}
-                                                            {student.role === 'Instructor' && <span className="text-[10px] bg-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded border border-indigo-500/30 uppercase tracking-wider">Instructor</span>}
+                                                    <div className="flex-1 min-w-0 overflow-hidden">
+                                                        <h3 className={`font-bold truncate ${student.isBanned ? 'text-gray-500 line-through' : 'text-white'} flex items-center gap-2`}>
+                                                            <span className="truncate">{student.username || 'No Name'}</span>
+                                                            {student.role === 'Instructor' && <span className="text-[10px] bg-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded border border-indigo-500/30 uppercase tracking-wider flex-shrink-0">Instructor</span>}
                                                         </h3>
-                                                        <p className="text-gray-400 text-sm">{student.email}</p>
+                                                        <p className="text-gray-400 text-sm truncate">{student.email}</p>
                                                     </div>
                                                 </div>
-                                                <div className="flex items-center gap-3">
+                                                <div className="flex items-center gap-3 flex-shrink-0 ml-2">
                                                     
                                                     {canBan && (
                                                         <button 
                                                             onClick={() => handleBanToggle(student._id)}
-                                                            className={`px-4 py-2 rounded-lg font-bold text-xs border transition-all ${student.isBanned ? 'bg-gray-700 border-gray-600 text-white hover:bg-gray-600' : 'bg-orange-500/10 border-orange-500/50 text-orange-500 hover:bg-orange-500 hover:text-white'}`}
+                                                            className={`px-3 sm:px-4 py-2 rounded-lg font-bold text-xs border transition-all ${student.isBanned ? 'bg-gray-700 border-gray-600 text-white hover:bg-gray-600' : 'bg-orange-500/10 border-orange-500/50 text-orange-500 hover:bg-orange-500 hover:text-white'}`}
                                                         >
                                                             {student.isBanned ? '🔓 Unban' : '🚫 Ban'}
                                                         </button>
@@ -524,7 +524,7 @@ const Dashboard = ({ user, socket }) => {
                                                     {isSuperAdmin && (
                                                         <button 
                                                             onClick={() => setStudentToDelete(student._id)}
-                                                            className="px-4 py-2 rounded-lg font-bold text-xs bg-red-500/10 border border-red-500/50 text-red-500 hover:bg-red-600 hover:text-white transition-all"
+                                                            className="px-3 sm:px-4 py-2 rounded-lg font-bold text-xs bg-red-500/10 border border-red-500/50 text-red-500 hover:bg-red-600 hover:text-white transition-all"
                                                         >
                                                             🗑️ Delete
                                                         </button>
@@ -563,26 +563,26 @@ const Dashboard = ({ user, socket }) => {
                                     <div className="space-y-4">
                                         {studentsList.filter(s => s._id !== user._id).map(student => (
                                             <div key={student._id} className="flex items-center justify-between p-4 rounded-xl border border-gray-700 bg-gray-800 hover:border-gray-500 transition-colors">
-                                                <div className="flex items-center gap-4">
-                                                    <div className="relative">
+                                                <div className="flex items-center gap-4 flex-1 min-w-0">
+                                                    <div className="relative flex-shrink-0">
                                                         {student.avatar ? (
                                                             <img src={student.avatar} alt="avatar" className="w-12 h-12 rounded-full object-cover border-2 border-gray-600" />
                                                         ) : (
                                                             <div className="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center text-xl border-2 border-gray-600">👤</div>
                                                         )}
                                                     </div>
-                                                    <div>
-                                                        <h3 className="font-bold text-white">
+                                                    <div className="flex-1 min-w-0 overflow-hidden">
+                                                        <h3 className="font-bold text-white truncate">
                                                             {student.username || 'No Name'}
                                                         </h3>
-                                                        <p className="text-gray-400 text-sm">{student.email}</p>
+                                                        <p className="text-gray-400 text-sm truncate">{student.email}</p>
                                                     </div>
                                                 </div>
-                                                <div className="flex items-center gap-3">
+                                                <div className="flex items-center gap-3 flex-shrink-0 ml-2">
                                                     <select 
                                                         value={student.role || 'User'} 
                                                         onChange={(e) => handleRoleChange(student._id, e.target.value)}
-                                                        className={`text-xs font-bold rounded-lg px-4 py-2 border focus:outline-none transition-colors cursor-pointer ${
+                                                        className={`text-xs font-bold rounded-lg px-2 sm:px-4 py-2 border focus:outline-none transition-colors cursor-pointer ${
                                                             student.role === 'Admin' ? 'bg-red-500/20 text-red-400 border-red-500/50' : 
                                                             student.role === 'Instructor' ? 'bg-blue-500/20 text-blue-400 border-blue-500/50' : 
                                                             'bg-gray-900 text-gray-300 border-gray-600'
@@ -746,17 +746,17 @@ const Dashboard = ({ user, socket }) => {
                                     <div className="space-y-4">
                                         {enrollmentsList.map(enrollment => (
                                             <div key={enrollment.id} className="flex flex-col md:flex-row md:items-center justify-between p-4 rounded-xl border bg-gray-800 border-gray-700 hover:border-gray-500 transition-colors gap-4">
-                                                <div className="flex items-center gap-4 flex-1">
+                                                <div className="flex items-center gap-4 flex-1 min-w-0">
                                                     <div className="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center text-xl border-2 border-gray-600 flex-shrink-0">
                                                         👤
                                                     </div>
-                                                    <div>
-                                                        <h3 className="font-bold text-white line-clamp-1">{enrollment.studentName}</h3>
-                                                        <p className="text-gray-400 text-sm line-clamp-1">{enrollment.studentEmail}</p>
+                                                    <div className="flex-1 min-w-0 overflow-hidden">
+                                                        <h3 className="font-bold text-white truncate">{enrollment.studentName}</h3>
+                                                        <p className="text-gray-400 text-sm truncate">{enrollment.studentEmail}</p>
                                                     </div>
                                                 </div>
                                                 <div className="flex flex-col sm:items-end flex-1 gap-2">
-                                                    <div className="flex items-center gap-2 flex-wrap justify-end">
+                                                    <div className="flex items-center gap-2 flex-wrap justify-start sm:justify-end w-full">
                                                         <span className="bg-purple-500/10 border border-purple-500/30 text-purple-400 font-bold px-3 py-1 rounded-lg text-sm whitespace-nowrap">
                                                             📘 {enrollment.courseTitle}
                                                         </span>
