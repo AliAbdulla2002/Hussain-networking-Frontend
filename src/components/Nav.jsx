@@ -90,10 +90,14 @@ const Nav = (props) => {
     const isNewCourseActive = location.pathname === '/courses/new';
 
     return (
-        <nav className="bg-gray-900 px-4 md:px-8 py-2 flex justify-between items-center relative z-50 border-b border-gray-800 shadow-lg h-[85px]">
+        <nav className="bg-gray-900 px-4 md:px-8 py-2 flex justify-between items-center relative z-50 border-b border-gray-800 shadow-lg h-[85px] overflow-visible">
             <div className="flex items-center gap-10">
                 <Link className="flex items-center" to="/" onClick={() => setIsMobileMenuOpen(false)}>
-                    <img src="/Dark_logo.png" alt="Logo" className="h-[60px] md:h-[90px] object-contain mix-blend-lighten hover:opacity-90 transition-opacity" />
+                    <img 
+                        src="/Dark_logo.png" 
+                        alt="Logo" 
+                        className="h-[80px] w-auto object-contain mix-blend-lighten hover:opacity-90 transition-opacity transform scale-125 md:scale-100 origin-left ml-4 md:ml-0" 
+                    />
                 </Link>
 
                 {props.user && (
@@ -132,7 +136,7 @@ const Nav = (props) => {
                                 onClick={toggleViewMode}
                                 className={`hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg border text-xs font-bold transition-all shadow-md ${isStaff ? 'bg-blue-500/10 border-blue-500/50 text-blue-400 hover:bg-blue-600 hover:text-white' : 'bg-green-500/10 border-green-500/50 text-green-400 hover:bg-green-600 hover:text-white'}`}
                             >
-                                {isStaff ? '👀 Student View' : '⚙️ Admin View'}
+                                {isStaff ? '👀 Student View' : '⚙️️ Admin View'}
                             </button>
                         )}
 
@@ -210,7 +214,7 @@ const Nav = (props) => {
                         </button>
 
                         <button 
-                            className="lg:hidden text-white text-2xl focus:outline-none"
+                            className="lg:hidden text-white text-2xl focus:outline-none ml-2"
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         >
                             {isMobileMenuOpen ? '✖' : '☰'}
@@ -221,7 +225,7 @@ const Nav = (props) => {
                         <li className="hidden sm:block"><Link to='/' className="text-slate-200 font-bold text-base hover:text-red-400 transition-colors">Home</Link></li>
                         <li className="hidden sm:block"><Link to='/sign-up' className="text-slate-200 font-bold text-base hover:text-red-400 transition-colors">Sign Up</Link></li>
                         <li>
-                            <Link to='/sign-in' className="bg-red-600 text-white px-4 md:px-6 py-2 rounded-md font-bold text-sm md:text-lg shadow-md shadow-red-600/30 hover:bg-red-700 transition-all transform hover:scale-105 inline-block">
+                            <Link to='/sign-in' className="bg-red-600 text-white px-5 py-2.5 md:px-6 rounded-md font-bold text-sm md:text-lg shadow-md shadow-red-600/30 hover:bg-red-700 transition-all transform hover:scale-105 inline-block">
                                 Sign In
                             </Link>
                         </li>
