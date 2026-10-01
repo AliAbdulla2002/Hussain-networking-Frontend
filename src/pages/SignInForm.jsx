@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router"
+import { useNavigate, Link } from "react-router"
 import { useState } from "react"
 import { signIn } from "../services/auth"
 
@@ -70,9 +70,12 @@ const SignInForm = (props) => {
                             placeholder="••••••••"
                             className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all"
                         />
+                        <Link to="/forgot-password" className="text-xs text-red-500 hover:text-white transition-colors float-right mt-2 font-bold">
+                            Forgot Password?
+                        </Link>
                     </div>
                     
-                    <div className="flex gap-4 mt-4">
+                    <div className="flex gap-4 mt-6">
                         <button 
                             type="submit"
                             className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg shadow-red-600/30 transition-all"

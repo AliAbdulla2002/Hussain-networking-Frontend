@@ -41,4 +41,31 @@ const getAllUsers = async () => {
     }
 }
 
-export { getProfile, updateProfile, getAllUsers }
+const forgotPassword = async (email) => {
+    try {
+        const res = await fetch(`${BASE_URL}/forgot-password`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
+        });
+        return res.json();
+    } catch (error) {
+        return { err: error.message };
+    }
+};
+
+const resetPassword = async (id, token, password) => {
+    try {
+        const res = await fetch(`${BASE_URL}/reset-password/${id}/${token}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password }),
+        });
+        return res.json();
+    } catch (error) {
+        return { err: error.message };
+    }
+};
+
+
+export { getProfile, updateProfile, getAllUsers, forgotPassword, resetPassword }

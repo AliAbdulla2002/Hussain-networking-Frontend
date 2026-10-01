@@ -12,6 +12,8 @@ import CourseDetails from "./pages/CourseDetails"
 import CourseForm from "./pages/CourseForm"
 import Profile from "./pages/Profile"
 import Chat from './pages/Chat'
+import ForgotPassword from "./pages/ForgotPassword"
+import ResetPassword from "./pages/ResetPassword"
 import { io } from 'socket.io-client'
 
 const getUserFromToken = () => {
@@ -152,6 +154,8 @@ const App = () => {
           <>
             <Route path='/sign-up' element={<SignUpForm setUser={setUser} />} />
             <Route path='/sign-in' element={<SignInForm setUser={setUser} />} />
+            <Route path='/forgot-password' element={<ForgotPassword />} />
+            <Route path='/reset-password/:id/:token' element={<ResetPassword />} />
             <Route path='*' element={
                 <div className="min-h-[calc(100vh-85px)] bg-gray-900 flex flex-col items-center justify-center px-4 font-sans">
                     <div className="text-8xl mb-6 opacity-80">🔒</div>
